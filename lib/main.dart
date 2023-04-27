@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
           home: Consumer<AppRepository>(
             builder: (_, repository, __) => BlocProvider<TaskListCubit>(
               create: (_) => TaskListCubit(repository),
-              child: TaskList(),
+              child: const TaskList(),
             ),
           ),
-          theme: ThemeData(primarySwatch: Colors.yellow),
+          theme: ThemeData(primarySwatch: Colors.teal),
         ));
   }
 }

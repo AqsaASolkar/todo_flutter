@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'task.freezed.dart';
 part 'task.g.dart';
 
-@freezed
+@unfreezed
 abstract class Task extends HiveObject with _$Task {
   Task._(); //Add this line
 

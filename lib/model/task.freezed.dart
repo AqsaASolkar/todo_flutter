@@ -18,8 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Task {
   @HiveField(0)
   String get taskName => throw _privateConstructorUsedError;
+  @HiveField(0)
+  set taskName(String value) => throw _privateConstructorUsedError;
   @HiveField(1)
   bool get completed => throw _privateConstructorUsedError;
+  @HiveField(1)
+  set completed(bool value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
@@ -107,29 +111,15 @@ class _$_Task extends _Task {
 
   @override
   @HiveField(0)
-  final String taskName;
+  String taskName;
   @override
   @HiveField(1)
-  final bool completed;
+  bool completed;
 
   @override
   String toString() {
     return 'Task(taskName: $taskName, completed: $completed)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Task &&
-            (identical(other.taskName, taskName) ||
-                other.taskName == taskName) &&
-            (identical(other.completed, completed) ||
-                other.completed == completed));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, taskName, completed);
 
   @JsonKey(ignore: true)
   @override
@@ -140,16 +130,20 @@ class _$_Task extends _Task {
 
 abstract class _Task extends Task {
   factory _Task(
-      {@HiveField(0) required final String taskName,
-      @HiveField(1) required final bool completed}) = _$_Task;
+      {@HiveField(0) required String taskName,
+      @HiveField(1) required bool completed}) = _$_Task;
   _Task._() : super._();
 
   @override
   @HiveField(0)
   String get taskName;
+  @HiveField(0)
+  set taskName(String value);
   @override
   @HiveField(1)
   bool get completed;
+  @HiveField(1)
+  set completed(bool value);
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;

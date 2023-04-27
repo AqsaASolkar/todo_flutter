@@ -20,21 +20,42 @@ class TaskListCubit extends BaseCubit<TaskListState> {
     });
   }
 
-  void addTask(Task task) async {
-    _repository
-        .addTask(task)
-        .then((_) => fetchTasks(refresh: false, showLoading: true));
+  void fetchPendingTasks(
+      {bool refresh = false, bool showLoading = true}) async {
+    if (showLoading) {
+      emit(const BaseBlocState.loading());
+    }
+    _repository.getPendingTask().then((tasks) {
+      emit(BaseBlocState.loaded(TaskListState.taskLoaded(tasks: tasks)));
+    }).catchError((error) {
+      emit(BaseBlocState.error(error));
+    });
   }
 
-  void updateTask(Task task) async {
-    _repository
-        .updateTask(task)
-        .then((_) => fetchTasks(refresh: false, showLoading: true));
+  void fetchCompletedTask(
+      {bool refresh = false, bool showLoading = true}) async {
+    if (showLoading) {
+      emit(const BaseBlocState.loading());
+    }
+    _repository.getCompletedTask().then((tasks) {
+      emit(BaseBlocState.loaded(TaskListState.taskLoaded(tasks: tasks)));
+    }).catchError((error) {
+      emit(BaseBlocState.error(error));
+    });
   }
 
-  void deleteTask(Task task) async {
-    _repository
-        .removeTask(task)
-        .then((_) => fetchTasks(refresh: false, showLoading: false));
+  void addTask(Task task, {bool isCompletedTask = false}) async {
+    _repository.addTask(task).then(
+        (_) => isCompletedTask ? fetchCompletedTask() : fetchPendingTasks());
+  }
+
+  void updateTask(Task task, {bool isCompletedTask = false}) async {
+    _repository.updateTask(task).then(
+        (_) => isCompletedTask ? fetchCompletedTask() : fetchPendingTasks());
+  }
+
+  void deleteTask(Task task, {bool isCompletedTask = false}) async {
+    _repository.removeTask(task).then(
+        (_) => isCompletedTask ? fetchCompletedTask() : fetchPendingTasks());
   }
 }

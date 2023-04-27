@@ -15,6 +15,7 @@ class TaskDbHelper {
 
   Future<void> removeTask(Task task) async {
     var hiveDatabase = await DatabaseHelper.instance.box;
+    //await hiveDatabase!.values.re
     final taskToRemove = hiveDatabase?.values
         .firstWhere((element) => element.taskName == task.taskName);
     await taskToRemove?.delete();
@@ -25,7 +26,7 @@ class TaskDbHelper {
     final taskToEdit = hiveDatabase?.values
         .firstWhere((element) => element.taskName == task.taskName);
     final index = taskToEdit?.key as int;
-    await hiveDatabase!.put(index,
-        Task(taskName: task.taskName, completed: !taskToEdit!.completed));
+    await hiveDatabase!.put(
+        index, Task(taskName: task.taskName, completed: taskToEdit!.completed));
   }
 }
