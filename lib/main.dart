@@ -5,6 +5,7 @@ import 'package:todoflutter/database/task_db_helper.dart';
 import 'package:todoflutter/pages/task_list.dart';
 import 'package:provider/provider.dart';
 import 'package:todoflutter/pages/task_list_cubit.dart';
+import 'package:todoflutter/util/app_theme.dart';
 
 import 'datasource/app_repository.dart';
 import 'model/task.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
               child: const TaskList(),
             ),
           ),
-          theme: ThemeData(primarySwatch: Colors.teal),
+          theme: AppTheme.light,
         ));
   }
 }

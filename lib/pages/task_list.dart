@@ -36,12 +36,15 @@ class _TaskListState extends State<TaskList> {
         appBar: AppBar(
           title: const Text(
             "Todo App",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
         ),
         bottomNavigationBar: BottomNavigationBar(
+          selectedFontSize: 20,
+          unselectedFontSize: 15,
           backgroundColor: Theme.of(context).primaryColor,
-          unselectedItemColor: Colors.white.withOpacity(0.7),
+          unselectedItemColor: Colors.white.withOpacity(0.5),
           selectedItemColor: Colors.white,
           onTap: (index) => setState(() {
             selectedIndex = index;
@@ -63,6 +66,7 @@ class _TaskListState extends State<TaskList> {
           onPressed: () {
             createNewTask();
           },
+          backgroundColor: Theme.of(context).primaryColor,
           child: const Icon(Icons.add, size: 20),
         ),
         body: pendingTaskList());
